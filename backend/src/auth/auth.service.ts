@@ -17,7 +17,9 @@ export class AuthService {
     }
     const payload = { email: user.email };
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: this.jwtService.sign(payload, {
+        privateKey: process.env.JWT_SECRET,
+      }),
     };
   }
 }

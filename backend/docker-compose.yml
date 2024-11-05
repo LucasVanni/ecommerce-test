@@ -1,6 +1,6 @@
 services:
   db:
-    container_name: db
+    container_name: db-2
     image: postgres:13
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -12,8 +12,8 @@ services:
       - products-network
 
   dbeaver:
+    container_name: dbeaver-2
     image: dbeaver/cloudbeaver
-    container_name: dbeaver
     ports:
       - '91:8978'
     depends_on:

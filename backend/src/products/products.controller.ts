@@ -9,8 +9,8 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { Public } from '../decorators/public.decorator';
+import { AuthGuard } from '../guards/auth.guard';
 import { ProductsService } from './products.service';
 
 @Controller('products')

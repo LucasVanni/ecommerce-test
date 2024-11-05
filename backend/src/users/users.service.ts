@@ -1,20 +1,22 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-import { Repository } from 'typeorm';
+import { EntityManager } from 'typeorm';
 import { LoginUserDto } from './dto/users.dto';
 import { User } from './users.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly userRepository: Repository<User>) {}
+  constructor(private entityManager: EntityManager) {}
 
   async create(email: string, password: string): Promise<User> {
-    const userExists = await this.userRepository.findOne({ where: { email } });
+    const userExists = await this.entityManager.findOne(User, {
+      where: { email },
+    });
     if (userExists) {
       throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
     }
-    const user = this.userRepository.create({ email, password });
-    return this.userRepository.save(user);
+    const user = this.entityManager.create(User, { email, password });
+    return this.entityManager.save(user);
   }
 
   async findByLogin(loginUserDto: LoginUserDto): Promise<User | undefined> {
@@ -26,7 +28,7 @@ export class UsersService {
   }
 
   async findByEmail(email: string): Promise<User | undefined> {
-    return this.userRepository.findOne({ where: { email } });
+    return this.entityManager.findOne(User, { where: { email } });
   }
 
   async validateUser(email: string, password: string): Promise<boolean> {

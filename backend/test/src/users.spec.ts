@@ -1,6 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { CreateUserDto } from '../../src/users/dto/user.dto';
 import { UsersController } from '../../src/users/users.controller';
+import { User } from '../../src/users/users.entity';
 import { UsersService } from '../../src/users/users.service';
 
 describe('UsersController', () => {
@@ -9,6 +11,15 @@ describe('UsersController', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [
+        TypeOrmModule.forRoot({
+          type: 'sqlite',
+          database: ':memory:',
+          entities: [User],
+          synchronize: true,
+        }),
+        TypeOrmModule.forFeature([User]),
+      ],
       controllers: [UsersController],
       providers: [
         {

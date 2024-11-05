@@ -3,7 +3,11 @@ import fetch from 'node-fetch';
 
 @Injectable()
 export class ProductsService {
-  private readonly baseUrl: string = process.env.API_URL;
+  private readonly baseUrl: string = '';
+
+  constructor() {
+    this.baseUrl = process.env.API_URL;
+  }
 
   async getAllProducts(limit: number = 30, skip: number = 0) {
     const response = await fetch(`${this.baseUrl}?limit=${limit}&skip=${skip}`);
