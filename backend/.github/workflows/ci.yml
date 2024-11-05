@@ -1,4 +1,4 @@
-name: 'ci-sales-api'
+name: 'ci-api'
 
 on: [push]
 
