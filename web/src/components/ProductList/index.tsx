@@ -16,7 +16,7 @@ const ProductList = ({ products }: { products: Product[] }) => {
       {products?.map((product) => (
         <div key={product.id} className="group relative">
           <div
-            className="cursor-pointer"
+            className="ursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               window.location.href = `/product/details/${product.id}`;
