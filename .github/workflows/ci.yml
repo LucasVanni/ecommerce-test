@@ -28,14 +28,14 @@ jobs:
       - name: Install dependencies
         run: |
           cd ${{ matrix.project }}
-          npx install
+          npm install --legacy-peer-deps
 
       - name: Run tests
         run: |
           cd ${{ matrix.project }}
-          npx test
+          npm test
 
       - name: Build project
         run: |
           cd ${{ matrix.project }}
-          npx run build
+          npm run build
