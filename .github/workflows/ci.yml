@@ -28,14 +28,14 @@ jobs:
       - name: Install dependencies
         run: |
           cd ${{ matrix.project }}
-          npm install
+          npx install
 
       - name: Run tests
         run: |
           cd ${{ matrix.project }}
-          npm test
+          npx test
 
       - name: Build project
         run: |
           cd ${{ matrix.project }}
-          npm run build
+          npx run build
