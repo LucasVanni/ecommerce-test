@@ -39,6 +39,7 @@ describe('UsersController', () => {
     const createUserDto: CreateUserDto = {
       email: 'test@example.com',
       password: 'password',
+      name: 'test',
     };
     const result = await usersController.register(createUserDto);
     expect(result).toEqual({ email: 'test@example.com' });
@@ -52,6 +53,7 @@ describe('UsersController', () => {
     const createUserDto: CreateUserDto = {
       email: 'test@example.com',
       password: 'password',
+      name: 'test',
     };
 
     await expect(usersController.register(createUserDto)).rejects.toThrow(

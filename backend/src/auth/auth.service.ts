@@ -1,6 +1,6 @@
-import { EmailService } from '@/email/email.service';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { EmailService } from '../email/email.service';
 import { LoginUserDto } from '../users/dto/users.dto';
 import { UsersService } from '../users/users.service';
 
