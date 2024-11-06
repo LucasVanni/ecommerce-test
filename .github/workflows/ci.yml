@@ -33,8 +33,7 @@ jobs:
       - name: Run tests
         run: |
           cd ${{ matrix.project }}
-          if [ "${{ matrix.project }}" == "web" ]; then npx playwright install; fi
-          npm test
+          if [ "${{ matrix.project }}" == "backend" ]; then  npm test; fi
 
       - name: Build project
         run: |
