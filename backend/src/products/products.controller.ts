@@ -21,20 +21,17 @@ export class ProductsController {
   @Get()
   @Public()
   getAllProducts(
-    @Query('limit') limit: number = 30,
+    @Query('limit') limit: number = 10,
     @Query('skip') skip: number = 0,
+    @Query('search') search: string = '',
   ) {
-    return this.productsService.getAllProducts(limit, skip);
+    return this.productsService.getAllProducts(limit, skip, search);
   }
 
   @Get(':id')
-  getProductById(@Param('id') id: number) {
+  @Public()
+  async getProductById(@Param('id') id: number) {
     return this.productsService.getProductById(id);
-  }
-
-  @Get('search')
-  searchProducts(@Query('q') query: string) {
-    return this.productsService.searchProducts(query);
   }
 
   @Get('categories')

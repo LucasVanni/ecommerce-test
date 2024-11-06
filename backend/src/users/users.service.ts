@@ -8,14 +8,14 @@ import { User } from './users.entity';
 export class UsersService {
   constructor(private entityManager: EntityManager) {}
 
-  async create(email: string, password: string): Promise<User> {
+  async create(name: string, email: string, password: string): Promise<User> {
     const userExists = await this.entityManager.findOne(User, {
       where: { email },
     });
     if (userExists) {
       throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
     }
-    const user = this.entityManager.create(User, { email, password });
+    const user = this.entityManager.create(User, { name, email, password });
     return this.entityManager.save(user);
   }
 
@@ -37,5 +37,13 @@ export class UsersService {
       return false;
     }
     return await bcrypt.compare(password, user.password);
+  }
+
+  async resetPassword(email: string, password: string) {
+    return this.entityManager.update(
+      User,
+      { email },
+      { password: await bcrypt.hash(password, 10) },
+    );
   }
 }

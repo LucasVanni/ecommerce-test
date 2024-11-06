@@ -9,18 +9,15 @@ export class ProductsService {
     this.baseUrl = process.env.API_URL;
   }
 
-  async getAllProducts(limit: number = 30, skip: number = 0) {
-    const response = await fetch(`${this.baseUrl}?limit=${limit}&skip=${skip}`);
+  async getAllProducts(limit: number = 10, skip: number = 0, search: string) {
+    const response = await fetch(
+      `${this.baseUrl}/search?q=${search}&limit=${limit}&skip=${skip}`,
+    );
     return response.json();
   }
 
   async getProductById(id: number) {
     const response = await fetch(`${this.baseUrl}/${id}`);
-    return response.json();
-  }
-
-  async searchProducts(query: string) {
-    const response = await fetch(`${this.baseUrl}/search?q=${query}`);
     return response.json();
   }
 
