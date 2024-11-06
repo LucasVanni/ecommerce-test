@@ -4,7 +4,7 @@ import Form from "@/components/Form";
 import Input from "@/components/Input";
 import { useRecoveryPassword, useRecoveryPasswordToken } from "@/hooks/auth";
 import { useAppStore } from "@/store";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const RecoveryPassword = () => {
@@ -19,8 +19,7 @@ const RecoveryPassword = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const token = urlParams.get("token");
+  const { token } = useParams();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,7 +30,7 @@ const RecoveryPassword = () => {
 
     if (token) {
       mutateRecoveryPasswordToken({
-        token,
+        token: token as string,
         password,
         confirmPassword,
       });
